@@ -26,21 +26,22 @@ Custno, firstname, lastname, age, profession
 4000017,Neal,Lawrence,72,Computer support specialist
 4000018,Jean,Griffin,45,Childcare worker
 4000019,Kristine,Dougherty,63,Financial analyst
-Step 1: Create a HBase table ‘customers’ with column_family ‘customers_data’ from HBase shell.
 
-# Enter into HBase shell
+## Step 1: Create a HBase table ‘customers’ with column_family ‘customers_data’ from HBase shell.
 
+### Enter into HBase shell
 [training@localhost ~]$ hbase shell
-# Create a table ‘customers’ with column family ‘customers_data’
 
+### Create a table ‘customers’ with column family ‘customers_data’
 hbase(main):001:0> create 'customers', 'customers_data'
-# List the tables
 
+### List the tables
 hbase(main):002:0> list
-# Exit from HBase shell
 
+### Exit from HBase shell
 hbase(main):003:0> exit
-Step 2: Write the following PIG script to load data into the ‘customers’ table in HBase
+
+## Step 2: Write the following PIG script to load data into the ‘customers’ table in HBase
 
 -- Name your script Load_HBase_Customers.pig
 -- Load dataset 'customers' from HDFS location
@@ -65,10 +66,12 @@ STORE raw_data INTO 'hbase://customers' USING org.apache.pig.backend.hadoop.hbas
  customers_data:age 
  customers_data:profession'
 );
-Step 3: Run the PIG Script (Load_HBase_Customers.pig)
+
+## Step 3: Run the PIG Script (Load_HBase_Customers.pig)
 
 [training@localhost ~]$ pig Load_HBase_Customers.pig
-Step 4: Enter HBase shell and verify the data in the ‘customers’ table.
+
+## Step 4: Enter HBase shell and verify the data in the ‘customers’ table.
 
 hbase(main):001:0> scan 'customers'
 You may add an additional column family, say ‘transactions’ and try adding transactional data into the table.
