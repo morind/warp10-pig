@@ -27,13 +27,13 @@ Custno, firstname, lastname, age, profession
 4000018,Jean,Griffin,45,Childcare worker
 4000019,Kristine,Dougherty,63,Financial analyst
 
-## Step 1: Create a HBase table ‘customers’ with column_family ‘customers_data’ from HBase shell.
+## Step 1: Create a HBase table ‘customers’ with column_family ‘cdata’ from HBase shell.
 
 ### Enter into HBase shell
 [training@localhost ~]$ hbase shell
 
-### Create a table ‘customers’ with column family ‘customers_data’
-hbase(main):001:0> create 'customers', 'customers_data'
+### Create a table ‘customers’ with column family ‘cdata’
+hbase(main):001:0> create 'customers', 'cdata'
 
 ### List the tables
 hbase(main):002:0> list
@@ -61,10 +61,10 @@ raw_data = LOAD 'hdfs:/user/training/customers' USING PigStorage(',') AS (
 --NOTE: In this case, custno (first unique column) will be considered as row key.
 
 STORE raw_data INTO 'hbase://customers' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage(
-'customers_data:firstname 
- customers_data:lastname 
- customers_data:age 
- customers_data:profession'
+'cdata:first 
+ cdata:last 
+ cdata:age 
+ cdata:prof'
 );
 
 ## Step 3: Run the PIG Script (Load_HBase_Customers.pig)
@@ -74,4 +74,4 @@ STORE raw_data INTO 'hbase://customers' USING org.apache.pig.backend.hadoop.hbas
 ## Step 4: Enter HBase shell and verify the data in the ‘customers’ table.
 
 hbase(main):001:0> scan 'customers'
-You may add an additional column family, say ‘transactions’ and try adding transactional data into the table.
+You may add an additional column family for ‘transactions’ and try adding transactional data into the table.
