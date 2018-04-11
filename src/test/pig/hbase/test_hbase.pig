@@ -16,8 +16,8 @@ raw_data = LOAD 'hdfs:/user/training/customers' USING PigStorage(',') AS (
 --NOTE: In this case, custno (first unique column) will be considered as row key.
 
 STORE raw_data INTO 'hbase://customers' USING org.apache.pig.backend.hadoop.hbase.HBaseStorage(
-'customers_data:firstname 
- customers_data:lastname 
- customers_data:age 
- customers_data:profession'
+'cdata:first 
+ cdata:last 
+ cdata:age 
+ cdata:prof'
 );
